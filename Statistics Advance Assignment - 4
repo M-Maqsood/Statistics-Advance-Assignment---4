@@ -1,0 +1,182 @@
+
+Q1: What is the difference between a t-test and a z-test? Provide an example scenario where you would use each type of test.
+Ans. The main difference between z-test and t-test is when sample size is large (>=30) and standard deviation is known, we use z-test and when sample size is small (30>) and standard deviation is unknown we use t-test.
+Suppose we want to test whether there is a difference in the mean weight of two groups of people:men and women. We can use t-test to compare mean weight of men and women if sample size is less than 30 and z-test when sample size is greater than 30 and standard deviation is known.
+
+Q2: Differentiate between one-tailed and two-tailed tests.
+A one-tailed test is a statistical test in which critical area of distribution is one-sided so that it is greater or smaller than a certain value, but not both.
+A two-tailed test is a statistical test in which the critical area of distribution is two-sided and test whether the sample is greater than or less than a certain range of values.
+
+Q3: Explain the concept of Type 1 and Type 2 errors in hypothesis testing. Provide an example scenario for each type of error.
+Ans. In hypothesis testing, type 1 error occurs when null is rejected but it is actually true. Type 2 error occurs when null hypothesis is not rejected but it is actually false
+Examples: Suppose, in medical testing, a patient is diagnosed with a disease but actually he or she is healthy. In this case it is a Type 1 error. And if a patient is found to be healthy but actually he or she has some disease then it is a type 2 error.
+
+Q4: Explain Bayes's theorem with an example.
+Ans. Bayes's theorem describes the probability of an event based on prior knowledge of conditions that might be related to an event.
+Lets take an example of a toy manufacturing company. Machines A1,A2 and A3 produced 25%,35% and 40% of toys respectively. Out of these 5%, 4% and 2% found to be defective. Then to find the probability that a toy was manufactured by machine A2, when selected at random, we use Bayes's theorem.
+
+Q5: What is a confidence interval? How to calculate the confidence interval, explain with an example.
+Ans. A confidence interval is a range between which a true value exists with a certain level of confidence.To calculate the confidence interval first we have to calculate standard error by dividing standard deviation by root of sample size and then calculate the z-value or t-value
+lower_ci=mean-(t-value or z-value * standard error)
+upper_ci=mean+(t-value or z-value * standard error)
+Example: A random sample of heights of students taken from a population (n=50). The sample mean is 165 cm and standard deviation is 8. We want to calculate the 95% confidence interval for true average of heights of students.
+Standard error=std/sqrt(50)=8/sqrt(50)=1.13
+alpha=0.5
+z-value=1.96
+upper_ci=165+(1.96 * 1.13)=167.2148
+lower_ci=165-(1.96 * 1.13)=162.7965
+(162.7965,162.2148)
+
+Q6. Use Bayes's Theorem to calculate the probability of an event occurring given prior knowledge of the event's probability and new evidence. Provide a sample problem and solution.
+Ans. Machines A1,A2 and A3 produced 25%,35% and 40% of toys respectively. Out of these 5%, 4% and 2% found to be defective. Then to find the probability that a toy was manufactured by machine A2, when selected at random, we use Bayes's theorem.
+Pr(A1 that car manufactured from machine A1)=25%=0.25
+Pr(A2 that car manufactured from machine A2)=35%=0.35
+Pr(A3 that car manufactured from machine A3)=40%=0.40
+Let B be the probability that a toy selected is defective
+Pr(B/A1 the defective toy was from machine A1)=5%=0.05
+Pr(B/A2 the defective toy was from machine A2)=4%=0.04
+Pr(B/A3 the defective toy was from machine A3)=2%=0.02
+We have to find pr(A2/B)
+Pr(A2/B)=(Pr(A2)* P(B/A2))/(P(A1)* P(B/A1))+(P(A2)* P(B/A2))+(P(A2)* P(B/A1))
+
+P_A1,P_A2,P_A3=0.25,0.35,0.40
+P_B_A1,P_B_A2,P_B_A3=0.05,0.04,0.02
+P_A2_B=(P_A2*P_B_A2)/((P_A1*P_B_A1)+(P_A2*P_B_A2)+(P_A3*P_B_A3))
+print("The probability that a defective toy is from machine A2 is ",P_A2_B)
+The probability that a defective toy is from machine A2 is  0.4057971014492753
+Q7. Calculate the 95% confidence interval for a sample of data with a mean of 50 and a standard deviation of 5. Interpret the results.
+Ans. Sample size is not given so we assume sample size to 30
+Since sample size is large and standard deviation is given, we'll use z-test
+
+import numpy as np
+alpha=0.05
+mean=50
+std=5
+critical_value=1.96
+standard_error=std/np.sqrt(30)
+upper_ci=mean+(critical_value*standard_error)
+lower_ci=mean-(critical_value*standard_error)
+print(f"The confidence interval is {lower_ci,upper_ci}")
+The confidence interval is (48.21077297881646, 51.78922702118354)
+We are 95% confident that the true mean will be between range(48.21,51.78)
+
+Q8. What is the margin of error in a confidence interval? How does sample size affect the margin of error? Provide an example of a scenario where a larger sample size would result in a smaller margin of error.
+Ans. Margin of error in confidence interval is the range of values between which a true population parameter is likely to fall. The relationship between margin of error and sample size is as sample size increases, the margin of error decreases.
+Suppose a professor wants to calculate the 95% confidence interval of height of 100 students with mean height of 165 cm and standard deviation of 1. Then the margin of error would be:
+critical value(std/sqrt(100))=1.96(1/sqrt(100))=0.0196
+Now let's take sample size as 600
+1.96*(1/sqrt(600))=0.0032
+As you can see, when sample size is 100, the margin of error was 0.0196 and when we increase sample size to 600, the margin of error decreased to 0.0032
+
+Q9. Calculate the z-score for a data point with a value of 75, a population mean of 70, and a population standard deviation of 5. Interpret the results.
+
+data_point=75
+mean=70
+std=5
+z_score=(data_point-mean)/std
+print("The z-score is ",z_score)
+The z-score is  1.0
+Interpretation: A z_score of zero means that the data point is one standard deviation away from the mean
+
+Q10. In a study of the effectiveness of a new weight loss drug, a sample of 50 participants lost an average of 6 pounds with a standard deviation of 2.5 pounds. Conduct a hypothesis test to determine if the drug is significantly effective at a 95% confidence level using a t-test.
+
+Null Hypothesis: The mean weight loss of population is zero
+Alternate hypothesis: The mean weight loss is greater than zero
+It is a one tail test
+If t-stats is greater than t-value, we will reject the null hypothesis
+
+from scipy.stats import t
+n=50
+sample_mean=6
+population_mean=0
+std=2.5
+alpha=0.05
+t_value=t.ppf(alpha,49)
+t_stats=(sample_mean-population_mean)/(std/np.sqrt(n))
+print(f"t-stats: {t_stats}\nt_value: {t_value}")
+if (t_stats>t_value):
+    print("We reject null hypothesis")
+    print("Conclusion: The drug is found to be significantly effective at 95% confidence interval")
+else:
+    print("We fail to reject null hypothesis")
+    print("Conclusion: The drug is not effective in reducing the weight")
+t-stats: 16.970562748477143
+t_value: -1.6765508919142635
+We reject null hypothesis
+Conclusion: The drug is found to be significantly effective at 95% confidence interval
+Q11. In a survey of 500 people, 65% reported being satisfied with their current job. Calculate the 95% confidence interval for the true proportion of people who are satisfied with their job.
+
+In this we have to calculate confidence interval for proportion.
+Formula p+-z * sqrt(p(1-p)/n)
+p=sample proportion=0.65
+
+from scipy.stats import norm
+p=0.65
+n=500
+z_value=(norm.ppf(alpha/2))
+c1=p-(z_value*np.sqrt((p*(1-p))/n))
+c2=p+(z_value*np.sqrt((p*(1-p))/n))
+print(f"We are 95% confident that the true proportionof people who are\nsatisfied with their jobs lies between ({c2},{c1})")
+We are 95% confident that the true proportionof people who are
+satisfied with their jobs lies between (0.6081925393809212,0.6918074606190788)
+Q12. A researcher is testing the effectiveness of two different teaching methods on student performance. Sample A has a mean score of 85 with a standard deviation of 6, while sample B has a mean score of 82 with a standard deviation of 5. Conduct a hypothesis test to determine if the two teaching methods have a significant difference in student performance using a t-test with a significance level of 0.01.
+
+Null hypothesis: There is no difference in student performance
+Alternate hypothesis: There is a difference in student's performance
+
+import scipy.stats as stat
+n1,n2=30,30 # Since sample size is not given, we assume both the sample sizes to be 30
+x1,x2=85,82
+s1,s2=6,5
+alpha=0.01
+dof=(n1+n2-2)
+s_p=np.sqrt((((n1-1)*s1**2)+(n2-1)*s2**2)/(n1+n2-2))
+t_stats=(x1-x2)/(s_p*np.sqrt((1/n1)+(1/n2)))
+critical_value=abs(t.ppf(alpha/2,dof))
+print(f"T-stats: {t_stats} | Critical-value: {critical_value}")
+if (t_stats<(-critical_value) or t_stats>(critical_value)):
+    print("We reject null hypothesis")
+    print("Conclusion: There is no difference in student's performance")
+else:
+    print("We fail to reject null hypothesis")
+    print("Conclusion: There is a difference in student's performance")
+T-stats: 2.10386061995483 | Critical-value: 2.663286953809868
+We fail to reject null hypothesis
+Conclusion: There is a difference in student's performance
+Q13. A population has a mean of 60 and a standard deviation of 8. A sample of 50 observations has a mean of 65. Calculate the 90% confidence interval for the true population mean.
+
+from scipy.stats import norm
+population_mean=60
+population_std=8
+sample_size=50
+sample_mean=65
+z_value=norm.ppf(1-0.1/2)
+ci1=sample_mean+(z_value*(population_std/np.sqrt(sample_size)))
+ci2=sample_mean-(z_value*(population_std/np.sqrt(sample_size)))
+print(f"90% confidence interval: {ci2,ci1}")
+90% confidence interval: (63.13906055411732, 66.86093944588268)
+Q14. In a study of the effects of caffeine on reaction time, a sample of 30 participants had an average reaction time of 0.25 seconds with a standard deviation of 0.05 seconds. Conduct a hypothesis test to determine if the caffeine has a significant effect on reaction time at a 90% confidence level using a t-test.
+
+Null Hypothesis: No effect of caffeine on reaction time
+Alternate hypothesis: caffeine has effect on reaction time
+
+from scipy.stats import t
+populationMean=0 
+'''we assume population mean as 
+0 as there is no change in reaction time '''
+alpha=0.1
+n=30
+mean=0.25
+std=0.05
+t_stats=(0.25 - 0) / (0.05 / np.sqrt(30)) 
+t_value=t.ppf(alpha/2,29)
+print(f"T-stats: {t_stats} | T-value: {t_value}")
+if (t_stats>t_value):
+    print("We reject null hypothesis")
+    print("Conclusion: Caffeine has significant effect on reaction time")
+else:
+    print("We fail to reject null hypothesis")
+    print("Conclusion: The caffeine has no effect on reaction time")
+T-stats: 27.386127875258307 | T-value: -1.6991270265334977
+We reject null hypothesis
+Conclusion: Caffeine has significant effect on reaction time
